@@ -8,37 +8,37 @@
   <img src="https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql&logoColor=white" alt="PostgreSQL 16" />
 </p>
 
-Application bancaire de démonstration conçue pour simuler un système de banque moderne avec moteur transactionnel, grand livre comptable, contrôle de concurrence, sécurité RBAC et interface utilisateur professionnelle.
+A virtual banking demo built to showcase a modern banking system, including a transaction engine, double-entry ledger, concurrency controls, role-based access control (RBAC), and a polished web interface.
 
-> **Avertissement :** ce projet est destiné à l’apprentissage, aux démonstrations et au portfolio. Il ne s’agit pas d’un système bancaire réel et ne doit pas être utilisé pour traiter de vrais fonds, paiements ou données sensibles sans revue de sécurité, audits réglementaires, gestion des secrets et migrations de production.
+> **Disclaimer:** This project is intended for learning, demonstrations, and portfolio use. It is not a real banking system and must not be used to process real funds, payments, or sensitive data without professional security reviews, regulatory audits, secure secret management, and production-ready database migrations.
 
-## Pourquoi ce projet ?
+## Project Overview
 
-AuraBank a été conçu pour illustrer une architecture bancaire robuste et crédible, avec :
+AuraBank demonstrates a robust banking application architecture through:
 
-- un backend API sécurisé en NestJS,
-- une logique comptable en partie double,
-- des mécanismes de concurrence et d’idempotence,
-- une séparation des rôles utilisateurs,
-- une interface de gestion orientée produit,
-- une base technologique adaptée à une démonstration de compétences techniques.
+- A secure NestJS API
+- Double-entry accounting
+- Concurrency control and idempotency
+- Role-based access for different user types
+- A user-focused banking interface
+- A modern technology stack suitable for demonstrating full-stack engineering skills
 
 ---
 
-## Fonctionnalités principales
+## Key Features
 
-- Inscription client et authentification JWT avec rafraîchissement de tokens
-- Gestion des rôles : client, conseiller et administrateur
-- Ouverture de comptes courant et épargne
-- Dépôts, retraits, virements internes et vérification de soldes
-- Grand livre comptable en double entrée avec validation des écritures
-- Vérrouillage de comptes et traitement transactionnel sécurisé
-- Clés d’idempotence pour empêcher les doubles traitements
-- Alertes de fraude et journaux d’audit avec empreinte SHA-256
-- Cartes virtuelles simulées avec plafonds et règles métier
-- Simulation de demandes de prêt et approbation par le personnel
-- Simulateur de trafic réservé aux profils autorisés
-- Documentation Swagger API et interface utilisateur protégée par rôle
+- Customer registration and JWT authentication with token refresh
+- Role management for customers, advisors, and administrators
+- Checking and savings account creation
+- Deposits, withdrawals, internal transfers, and balance checks
+- Double-entry ledger with journal validation
+- Account locking and transactional processing
+- Idempotency keys to prevent duplicate operations
+- Fraud alerts and SHA-256 audit logs
+- Simulated virtual cards with limits and business rules
+- Loan application simulations and staff approvals
+- Traffic simulator restricted to authorized roles
+- Swagger API documentation and a role-protected user interface
 
 ---
 
@@ -46,7 +46,7 @@ AuraBank a été conçu pour illustrer une architecture bancaire robuste et cré
 
 ```text
 React + Vite (5173)
-        │ /api (proxy Vite)
+        │ /api (Vite proxy)
         ▼
 NestJS (3000) ── auth, accounts, transactions, ledger,
         │          fraud, cards, loans, audit, simulator
@@ -54,13 +54,14 @@ NestJS (3000) ── auth, accounts, transactions, ledger,
 PostgreSQL (5432) via TypeORM
 ```
 
-Le grand livre enregistre chaque opération dans une transaction de base de données. Les comptes concernés sont verrouillés dans un ordre déterministe pour éviter les incohérences. Une même clé d’idempotence rejoue exactement le même résultat, et toute réutilisation sur un autre mouvement est refusée.
+The ledger records each operation within a database transaction. Affected accounts are locked in a deterministic order to prevent inconsistencies. Reusing an idempotency key for the same operation returns the original result; reusing it for a different operation is rejected.
 
 ---
 
-## Stack technique
+## Technology Stack
 
 ### Backend
+
 - NestJS
 - TypeScript
 - TypeORM
@@ -70,6 +71,7 @@ Le grand livre enregistre chaque opération dans une transaction de base de donn
 - Class-validator / Class-transformer
 
 ### Frontend
+
 - React
 - Vite
 - TypeScript
@@ -77,143 +79,152 @@ Le grand livre enregistre chaque opération dans une transaction de base de donn
 
 ---
 
-## Prérequis
+## Prerequisites
 
-- Node.js 20 ou plus récent
+- Node.js 20 or later
 - npm
 - Docker Desktop
 - Git
 
 ---
 
-## Démarrage rapide (Windows / PowerShell)
+## Quick Start (Windows / PowerShell)
 
-### 1) Démarrer PostgreSQL
+### 1. Start PostgreSQL
+
+From the project root, run:
 
 ```powershell
-cd "C:\Users\MSI\Desktop\Files\projects Git\Virtual Banking System"
 docker compose up -d postgres
 ```
 
-### 2) Créer le fichier d’environnement backend
+### 2. Create the backend environment file
+
+From the project root:
 
 ```powershell
 Copy-Item backend\.env.example backend\.env
 ```
 
-Ensuite, définissez des valeurs fortes et distinctes pour :
+Set strong, distinct values for:
 
 - `JWT_SECRET`
 - `JWT_REFRESH_SECRET`
 
-Exemple pour générer une clé locale :
+Generate a secret locally with PowerShell:
 
 ```powershell
 [Convert]::ToBase64String([Security.Cryptography.RandomNumberGenerator]::GetBytes(48))
 ```
 
-### 3) Lancer le backend
+Run this command twice to generate separate secrets, then add them to `backend\.env`.
+
+### 3. Start the backend
+
+In a PowerShell terminal:
 
 ```powershell
-cd "C:\Users\MSI\Desktop\Files\projects Git\Virtual Banking System\backend"
+Set-Location backend
 npm install
 npm run start:dev
 ```
 
-### 4) Lancer le frontend
+### 4. Start the frontend
+
+In a second PowerShell terminal, from the project root:
 
 ```powershell
-cd "C:\Users\MSI\Desktop\Files\projects Git\Virtual Banking System\frontend"
+Set-Location frontend
 npm install
 npm run dev
 ```
 
-### 5) Ouvrir l’application
+### 5. Open the application
 
-- Frontend : <http://localhost:5173>
-- Swagger API : <http://localhost:3000/api/docs>
+- Web app: <http://localhost:5173>
+- Swagger API documentation: <http://localhost:3000/api/docs>
 
 ---
 
-## Comptes de démonstration
+## Demo Accounts
 
-Le schéma se synchronise automatiquement en développement. Pour charger les utilisateurs de démonstration, configurez `SEED_DEMO_DATA=true` avant le premier démarrage backend.
+The database schema is synchronized automatically in development. To load demo users, set `SEED_DEMO_DATA=true` before starting the backend for the first time.
 
-Identifiants de démonstration :
+Demo email addresses:
 
 - `alice@aurabank.fr`
 - `bob@aurabank.fr`
 - `conseiller@aurabank.fr`
 - `admin@aurabank.fr`
 
-Mot de passe commun :
+Shared demo password:
 
 ```text
 BankSecret2026!
 ```
 
-> **Important :** désactivez cette option et changez ou supprimez ces comptes avant tout déploiement réel.
+> **Important:** Disable demo seeding and change or remove these accounts before any real-world deployment.
 
-Sans données de démonstration, vous pouvez créer un compte depuis la page d’inscription. Les inscriptions publiques ne peuvent créer que des clients.
+If demo data is disabled, you can register an account from the sign-up page. Public registration is limited to customer accounts.
 
 ---
 
-## Commandes utiles
+## Useful Commands
 
-Depuis la racine du projet :
+Run these commands from the project root:
 
-| Commande | Description |
+| Command | Description |
 |---|---|
-| `npm run dev:backend` | Démarre le backend NestJS en mode watch |
-| `npm run dev:frontend` | Démarre le frontend Vite |
-| `npm run build` | Construit les applications backend et frontend |
-| `npm test` | Exécute les tests backend |
-| `npm run test:concurrency` | Lance le test de concurrence du moteur transactionnel |
+| `npm run dev:backend` | Start the NestJS backend in watch mode |
+| `npm run dev:frontend` | Start the Vite frontend |
+| `npm run build` | Build both the backend and frontend |
+| `npm test` | Run the backend tests |
+| `npm run test:concurrency` | Run the transaction engine concurrency test |
 
 ---
 
-## Configuration et limites connues
+## Configuration and Known Limitations
 
-- `DB_TYPE=postgres` est le mode recommandé pour une utilisation réaliste.
-- SQLite peut convenir à un usage local simple, mais il ne fournit pas les mêmes garanties de verrouillage de lignes.
-- `SEED_DEMO_DATA` est désactivé par défaut.
-- En production, `synchronize` est désactivé ; des migrations TypeORM doivent être ajoutées et exécutées avant le déploiement.
-- Les cartes et opérations liées à la simulation de cartes sont purement démonstratives.
-- Le healthcheck de l’API et de PostgreSQL est exposé sur `/api/health`.
-
----
-
-## Sécurité et bonnes pratiques
-
-Ce projet est un exemple pédagogique et ne remplace pas une revue de sécurité professionnelle. Avant toute mise en production, il est conseillé de vérifier :
-
-- la rotation des secrets JWT,
-- la configuration des variables d’environnement,
-- les politiques de permissions RBAC,
-- les mécanismes de logging et d’audit,
-- les migrations et la stratégie de backup de données,
-- la conformité réglementaire selon le contexte d’utilisation.
+- `DB_TYPE=postgres` is the recommended configuration.
+- SQLite can be used for simple local testing, but it does not provide the same row-locking guarantees.
+- `SEED_DEMO_DATA` is disabled by default.
+- TypeORM `synchronize` is disabled in production. TypeORM migrations must be added and run before deployment.
+- Cards and card-related operations are simulations only.
+- API and PostgreSQL health status is available at `/api/health`.
 
 ---
 
-## Contribution
+## Security Considerations
 
-Les contributions sont les bienvenues. Pour proposer une amélioration :
+This project is an educational example and is not a substitute for a professional security review. Before considering a production deployment, review:
 
-1. fork du projet,
-2. création d’une branche dédiée,
-3. implémentation des changements,
-4. validation locale via tests et build,
-5. ouverture d’une pull request détaillée.
-
----
-
-## Licence
-
-Ce projet est fourni à des fins pédagogiques et de démonstration. Vérifiez les conditions d’usage avant toute réutilisation commerciale ou institutionnelle.
+- JWT secret generation and rotation
+- Environment variable and secret management
+- RBAC permissions and authorization rules
+- Logging and audit mechanisms
+- Database migrations and backup strategy
+- Regulatory requirements for the intended use case
 
 ---
 
-## Remerciements
+## Contributing
 
-Conçu pour mettre en valeur une architecture bancaire moderne, pensée autour de la robustesse transactionnelle, de la sécurité et du bon sens métier.
+Contributions are welcome. To propose an improvement:
+
+1. Fork the repository.
+2. Create a dedicated branch.
+3. Implement your changes.
+4. Run the tests and build locally.
+5. Open a pull request with a clear description.
+
+---
+
+## License
+
+This project is provided for educational and demonstration purposes. Review the applicable terms before any commercial or institutional reuse.
+
+---
+
+## Acknowledgments
+
+Built to showcase a modern banking application architecture focused on transactional integrity, security, and sound business logic.
