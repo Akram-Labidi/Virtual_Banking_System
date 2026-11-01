@@ -59,25 +59,28 @@ AuraBank demonstrates a robust banking application architecture through:
 
 ## Screenshots
 
-### Sign in
-
-![AuraBank sign-in page](./assets/log_in.png)
-
-### Dashboard
-
-![AuraBank banking dashboard](./assets/dashboard.png)
-
-### Transfers and deposits
-
-![AuraBank transfers and deposits page](./assets/Virement_et_Depot.png)
-
-### Accounts and cards
-
-![AuraBank accounts and virtual cards page](./assets/Compte_et_Carte.png)
-
-### Loans and repayment schedule
-
-![AuraBank loans and amortization page](./assets/Prets_et_Amortissement.png)
+<table>
+  <tr>
+    <td align="center"><strong>Sign in</strong></td>
+    <td align="center"><strong>Dashboard</strong></td>
+    <td align="center"><strong>Transfers and deposits</strong></td>
+  </tr>
+  <tr>
+    <td><a href="./assets/log_in.png"><img src="./assets/log_in.png" alt="AuraBank sign-in page" width="100%" /></a></td>
+    <td><a href="./assets/dashboard.png"><img src="./assets/dashboard.png" alt="AuraBank banking dashboard" width="100%" /></a></td>
+    <td><a href="./assets/Virement_et_Depot.png"><img src="./assets/Virement_et_Depot.png" alt="AuraBank transfers and deposits page" width="100%" /></a></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Accounts and cards</strong></td>
+    <td align="center"><strong>Loans and repayment schedule</strong></td>
+    <td align="center"><strong>Admin audit</strong></td>
+  </tr>
+  <tr>
+    <td><a href="./assets/Compte_et_Carte.png"><img src="./assets/Compte_et_Carte.png" alt="AuraBank accounts and virtual cards page" width="100%" /></a></td>
+    <td><a href="./assets/Prets_et_Amortissement.png"><img src="./assets/Prets_et_Amortissement.png" alt="AuraBank loans and amortization page" width="100%" /></a></td>
+    <td><a href="./assets/audit(admin).png"><img src="./assets/audit(admin).png" alt="AuraBank admin audit page" width="100%" /></a></td>
+  </tr>
+</table>
 
 ---
 
